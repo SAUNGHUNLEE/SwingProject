@@ -6,9 +6,62 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DBConnection {
+	//출력 
+	public static void main(String[] args) {
+		createUser("sinbc500","노원점","dontsee","A");
+		ArrayList<String> list = getCustomers();
+		for(String item:list) {
+			System.out.println(item);
+		}
+	}
 	
+	
+	//DB 내용 java로 가져오기
+	private static ArrayList<String> getCustomers() {
+		try {
+			Connection con = getConnection();
+			PreparedStatement psmt = con.prepareStatement("Select userId, userPw, userName, userGrant FROM user");
+			ResultSet rs = psmt.executeQuery();
+			ArrayList<String> list = new ArrayList<String>();
+			while(rs.next()) {
+				list.add("userId : " + rs.getString("userId") +
+						 "userPW: " + rs.getString("userPw") + 
+						 "userName: " +rs.getString("userName") + 
+						 "userGrant: " +rs.getString("userGrant"));
+			}
+			System.out.println("전부 출력");
+			return list;
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+
+
+	//DB내용 삽입
+	public static void createUser(String idTxt, String nameTxt, String passTxt, String authTxt)
+	{
+		try{
+			Connection con = getConnection();
+			PreparedStatement insert = con.prepareStatement(""
+					+ "INSERT INTO user"
+					+ "(userId,userPw,userName,userGrant) "
+					+ "VALUE "
+					+ "('"+idTxt+"','"+nameTxt+"','"+passTxt+"','"+authTxt+"')");
+			insert.executeUpdate();
+			System.out.println("성공");
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			
+		}
+	}
+	
+	//DB연결
 	private Connection con;
 	private Statement st;
 	private PreparedStatement ps;

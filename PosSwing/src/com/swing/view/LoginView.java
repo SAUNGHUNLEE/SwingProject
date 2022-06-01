@@ -162,8 +162,10 @@ public class LoginView extends JFrame {
 		// 이미지 버튼
 		JButton btnLogin = new JButton();
 		btnLogin.setBackground(Color.WHITE);
+
 		// 버튼 이미지 삽입
 		ImageIcon btnloginimg = new ImageIcon(LoginView.class.getResource("/com/swing/Image/image/logout.png"));
+		btnLogin.setPressedIcon(new ImageIcon(LoginView.class.getResource("/com/swing/Image/image/logout.png")));
 		btnloginimg = imageSetSize4(btnloginimg, 40, 40);
 		btnLogin.setIcon(btnloginimg);
 		btnLogin.setBounds(144, 388, 45, 49);

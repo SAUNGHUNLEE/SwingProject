@@ -7,6 +7,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.swing.main.LoginMain;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 
@@ -20,6 +23,8 @@ import java.awt.event.ActionEvent;
 public class MainView extends JFrame {
 
 	private JPanel contentPane;
+	private ProductView productView;
+	private LoginMain loginMain;
 
 
 	/**
@@ -35,7 +40,6 @@ public class MainView extends JFrame {
 	 */
 	public MainView() {
 		setTitle("MainView");
-		
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 950, 530);
@@ -44,7 +48,6 @@ public class MainView extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 		
 		MainPanel(contentPane);
 		
@@ -133,6 +136,12 @@ public class MainView extends JFrame {
 		
 		//상품판매
 		JButton btnProductSale = new JButton("\uD310\uB9E4");
+		btnProductSale.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ProductView();
+				
+			}
+		});
 		btnProductSale.setFont(new Font("굴림", Font.BOLD, 25));
 		
 		ImageIcon productImg = new ImageIcon(LoginView.class.getResource("/com/swing/Image/image/product.png"));
@@ -157,6 +166,11 @@ public class MainView extends JFrame {
 
 		//재고
 		JButton btnStock = new JButton("\uC7AC\uACE0");
+		btnStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Stock();
+			}
+		});
 		btnStock.setFont(new Font("굴림", Font.BOLD, 25));
 		
 		ImageIcon stockImg = new ImageIcon(LoginView.class.getResource("/com/swing/Image/image/quantity.png"));
@@ -179,25 +193,16 @@ public class MainView extends JFrame {
 		
 		
 		
-		//계정등록
-		JButton btnAdminAdd = new JButton("\uACC4\uC815\uB4F1\uB85D");
+		//계정관리
+		JButton btnAdminAdd = new JButton("\uACC4\uC815\uAD00\uB9AC");
+		btnAdminAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new AccountManageMent();
+			}
+		});
 		btnAdminAdd.setFont(new Font("굴림", Font.BOLD, 20));
-		btnAdminAdd.setBounds(59, 378, 127, 84);
+		btnAdminAdd.setBounds(223, 378, 127, 84);
 		contentPane.add(btnAdminAdd);
-		
-
-		
-		//계정수정
-		JButton btnModify = new JButton("\uACC4\uC815\uC218\uC815");
-		btnModify.setFont(new Font("굴림", Font.BOLD, 20));
-		btnModify.setBounds(275, 378, 127, 84);
-		contentPane.add(btnModify);
-		
-		//계정삭제
-		JButton btnDelete = new JButton("\uACC4\uC815\uC0AD\uC81C");
-		btnDelete.setFont(new Font("굴림", Font.BOLD, 20));
-		btnDelete.setBounds(479, 378, 127, 84);
-		contentPane.add(btnDelete);
 		
 		
 		//로그아웃
@@ -209,7 +214,7 @@ public class MainView extends JFrame {
 		});
 	
 		btnLogOut.setFont(new Font("굴림", Font.BOLD, 20));
-		btnLogOut.setBounds(688, 378, 127, 84);
+		btnLogOut.setBounds(524, 378, 127, 84);
 		contentPane.add(btnLogOut);
 		
 	
